@@ -30,7 +30,6 @@
                                     <th>Savol</th>
                                     <th>Javob</th>
                                     <th>User_IP</th>
-                                    <th>Count javoblar</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -41,12 +40,6 @@
                                         <td>{{ $model->question->name }}</td>
                                         <td>{{ $model->variant->variant }}</td>
                                         <td>{{ $model->user_ip }}</td>
-                                        <td>
-                                            <form action="/count" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="savol_id" value="{{ $model->savol_id }}">
-                                            </form>
-                                        </td>
                                         <td>
                                             <form action="delete-javob" method="POST">
                                                 @csrf

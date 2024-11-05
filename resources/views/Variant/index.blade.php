@@ -26,11 +26,6 @@
                         <h1 class="m-0">Variant</h1>
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col-sm-6 mt-2">
-                        <a href="/create-variant" class="btn btn-primary">Create</a>
-                    </div>
-                </div>
             </div>
         </div>
 

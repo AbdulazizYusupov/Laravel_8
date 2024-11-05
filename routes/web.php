@@ -8,6 +8,8 @@ use App\Http\Controllers\JavobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\VariantController;
+use App\Http\Middleware\AdminCheck;
+use App\Http\Middleware\Check;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/posts{post}',[IndexController::class,'post'])->name('posts');
@@ -24,9 +26,9 @@ Route::get('/category-search', [CategoryController::class, 'search'])->name('cat
 Route::post('/category-active',[CategoryController::class,'active'])->name('category.active');
 
 Route::get('/post', [PostController::class, 'index']);
-Route::get('/create-post', [PostController::class, 'create']);
+Route::get('/create-post', [PostController::class, 'create'])->middleware(Check::class . ':user,admin');
 Route::post('/post', [PostController::class, 'store']);
-Route::post('/delete-post', [PostController::class, 'destroy']);
+Route::post('/delete-post', [PostController::class, 'destroy'])->middleware(Check::class . ':admin');
 Route::put('/update-post/{post}', [PostController::class, 'update'])->name('post.update');
 Route::get('/post-search', [PostController::class, 'search'])->name('post.search');
 

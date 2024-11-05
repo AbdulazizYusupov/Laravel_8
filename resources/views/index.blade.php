@@ -166,34 +166,22 @@
                     @csrf
                     @foreach ($savollar as $savol)
                         <div class="row">
-                            <div class="col-12">
-                                @if (isset($javoblar[0]))
-                                    @foreach ($javoblar as $javob)
-                                        @if ($javob->savol_id == $savol->id)
-                                            <h4>Siz bu savolga ushbu variantni tanlagansiz: {{ $javob->variant->variant }}
-                                            </h4>
-                                        @endif
-                                        @if ($javob->savol_id != $savol->id)
-                                            <h3>{{ $savol->name }}</h3>
-                                            <input type="hidden" name="savol_id" value="{{ $savol->id }}">
-                                            <select name="variant_id" class="form-select">
-                                                @foreach ($variantlar as $variant)
-                                                    <option value="{{ $variant->id }}">{{ $variant->variant }}</option>
-                                                @endforeach
-                                            </select><br>
-                                            <input type="submit" class="btn btn-outline-info" value="Submit">
-                                        @endif
+                            <div class="col-12 mt-2">
+                                @if (isset($savol->javobs[0]))
+                                    @foreach ($savol->javobs as $javob)
+                                        <h4>{{ $savol->name }} : {{ $javob->variant->variant }}</h4>
                                     @endforeach
                                 @endif
-                                @if (!isset($javoblar[0]))
-                                    <h3>{{ $savol->name }}</h3>
+                                @if (!isset($savol->javobs[0]))
+                                    <h3>{{ $savol->name }} : </h3>
                                     <input type="hidden" name="savol_id" value="{{ $savol->id }}">
-                                    <select name="variant_id" class="form-select">
-                                        @foreach ($variantlar as $variant)
-                                            <option value="{{ $variant->id }}">{{ $variant->variant }}</option>
-                                        @endforeach
-                                    </select><br>
-                                    <input type="submit" class="btn btn-outline-info" value="Submit">
+                                    @foreach ($savol->variants as $variant)
+                                        <input type="radio" name="variant_id" value="{{ $variant->id }}"
+                                            for="radio">
+                                        <label for="radio">{{ $variant->variant }}</label>
+                                    @endforeach
+                                    <br>
+                                    <input type="submit" class="btn btn-outline-info mt-2" value="Submit">
                                 @endif
                             </div>
                         </div>
